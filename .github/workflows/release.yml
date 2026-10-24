@@ -23,6 +23,7 @@ jobs:
           java-version: 17
       - run: npm ci
       - run: npx tsc --noEmit
+      - run: npm test
       - run: npx expo prebuild --platform android --no-install
       - name: Build release APK
         working-directory: android
