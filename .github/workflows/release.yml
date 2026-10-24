@@ -28,13 +28,13 @@ jobs:
         working-directory: android
         run: ./gradlew assembleRelease --no-daemon
       - name: Name the APK
-        run: cp android/app/build/outputs/apk/release/app-release.apk level-monitor-${{ github.ref_name }}.apk
+        run: cp android/app/build/outputs/apk/release/app-release.apk leveller-${{ github.ref_name }}.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: level-monitor-apk
-          path: level-monitor-*.apk
+          name: leveller-apk
+          path: leveller-*.apk
       - name: Publish release
         if: startsWith(github.ref, 'refs/tags/')
-        run: gh release create "$GITHUB_REF_NAME" level-monitor-*.apk --generate-notes
+        run: gh release create "$GITHUB_REF_NAME" leveller-*.apk --generate-notes
         env:
           GH_TOKEN: ${{ github.token }}

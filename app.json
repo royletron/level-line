@@ -1,24 +1,24 @@
 {
   "expo": {
-    "name": "Level Monitor",
-    "slug": "level-monitor",
+    "name": "Leveller",
+    "slug": "leveller",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.royletron.levelline"
+      "bundleIdentifier": "com.royletron.leveller"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#101218",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.royletron.levelline"
+      "package": "com.royletron.leveller"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -27,7 +27,7 @@
       [
         "expo-audio",
         {
-          "microphonePermission": "Level Monitor listens to the microphone to show audio levels."
+          "microphonePermission": "Leveller listens to the microphone to show audio levels."
         }
       ]
     ]

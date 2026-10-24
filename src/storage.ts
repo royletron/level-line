@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const KEY = 'level-monitor/config/v1';
+const KEY = 'leveller/config/v1';
 
 export type Config = { tags: string[]; active: string | null };
 

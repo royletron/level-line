@@ -72,7 +72,12 @@ function Monitor() {
         keyboardShouldPersistTaps="handled"
         automaticallyAdjustKeyboardInsets
       >
-        <Text style={styles.title}>Level Monitor</Text>
+        <View>
+          <Text style={styles.title}>
+            Level<Text style={styles.titleAccent}>ler</Text>
+          </Text>
+          <Text style={styles.tagline}>Tag it. Listen. See the levels.</Text>
+        </View>
 
         <View style={styles.row}>
           <TextInput
@@ -155,6 +160,8 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: '#101218' },
   content: { padding: 16, gap: 12 },
   title: { color: '#fff', fontSize: 24, fontWeight: '700', marginTop: 8 },
+  titleAccent: { color: '#4cc38a' },
+  tagline: { color: '#99a', marginTop: 2 },
   row: { flexDirection: 'row', gap: 12, alignItems: 'center' },
   input: {
     flex: 1, color: '#fff', backgroundColor: '#1c1f2a', borderRadius: 8,

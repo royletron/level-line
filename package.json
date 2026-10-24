@@ -1,5 +1,5 @@
 {
-  "name": "repo",
+  "name": "leveller",
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {
@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.3.0",
+    "sharp": "^0.35.5",
     "typescript": "~6.0.3"
   },
   "scripts": {
