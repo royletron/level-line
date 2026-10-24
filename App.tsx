@@ -1,21 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { loadConfig, saveConfig } from './src/storage';
 import { addSample, dbToFraction, emptyStats, formatDb, type TagStats } from './src/levels';
 import { useMeter } from './src/useMeter';
 
 export default function App() {
+  return (
+    <SafeAreaProvider>
+      <Monitor />
+    </SafeAreaProvider>
+  );
+}
+
+function Monitor() {
   const [tags, setTags] = useState<Record<string, TagStats>>({});
   const [active, setActive] = useState<string | null>(null);
   const [draft, setDraft] = useState('');
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    loadConfig().then((c) => {
+      if (c) {
+        setTags(Object.fromEntries(c.tags.map((n) => [n, emptyStats()])));
+        setActive(c.active && c.tags.includes(c.active) ? c.active : null);
+      }
+      setLoaded(true);
+    });
+  }, []);
+
+  const tagNames = Object.keys(tags).join('\n');
+  useEffect(() => {
+    if (loaded) saveConfig({ tags: tagNames ? tagNames.split('\n') : [], active });
+  }, [loaded, tagNames, active]);
 
   const onLevel = useCallback(
     (db: number) => {
@@ -40,9 +65,13 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView style={styles.root} edges={['top', 'bottom', 'left', 'right']}>
       <StatusBar style="light" />
-      <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        keyboardShouldPersistTaps="handled"
+        automaticallyAdjustKeyboardInsets
+      >
         <Text style={styles.title}>Level Monitor</Text>
 
         <View style={styles.row}>
@@ -125,7 +154,7 @@ export default function App() {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: '#101218' },
   content: { padding: 16, gap: 12 },
-  title: { color: '#fff', fontSize: 24, fontWeight: '700', marginTop: 24 },
+  title: { color: '#fff', fontSize: 24, fontWeight: '700', marginTop: 8 },
   row: { flexDirection: 'row', gap: 12, alignItems: 'center' },
   input: {
     flex: 1, color: '#fff', backgroundColor: '#1c1f2a', borderRadius: 8,
